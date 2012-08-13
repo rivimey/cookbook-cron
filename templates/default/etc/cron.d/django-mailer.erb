@@ -1,2 +1,4 @@
-* * * * * <%= node.python.WORKON_HOME -%>/<%= node.webapp.app_name -%>/bin/python <%= node.webapp.deploy_root -%>/<%= node.webapp.app_name -%>/live/manage.py send_mail
-0,20,40 * * * * <%= node.python.WORKON_HOME -%>/<%= node.webapp.app_name -%>/bin/python <%= node.webapp.deploy_root -%>/<%= node.webapp.app_name -%>/live/manage.py retry_deferred
+* * * * * www-data (cd <%= node.webapp.deploy_root -%>/<%= node.webapp.app_name -%>/live; <%= node.python.WORKON_HOME -%>/<%= node.webapp.app_name -%>/bin/python ./manage.py send_mail >> ../emails/send_mail.log 2>&1)
+0,20,40 * * * * www-data (cd <%= node.webapp.deploy_root -%>/<%= node.webapp.app_name -%>/live; <%= node.python.WORKON_HOME -%>/<%= node.webapp.app_name -%>/bin/python ./manage.py retry_deferred >> ../emails/retry_deferred.log 2>&1)
+0       1 * * * www-data (cd <%= node.webapp.deploy_root -%>/<%= node.webapp.app_name -%>/live; <%= node.python.WORKON_HOME -%>/<%= node.webapp.app_name -%>/bin/python ./manage.py cleanup_mail --days=30 >> ../emails/cleanup_mail.log 2>&1)
+0,20,40 * * * * root find <%= node.webapp.deploy_root -%>/<%= node.webapp.app_name -%>/emails -type f -size 0k -exec rm {} \;
