@@ -44,7 +44,7 @@ defining node[:cron][:crond] with a hash of name => cron_job hash pairs.
             "crond": {
                 "echo": {
                     "minute": "5",
-                    "command": "echo This is a job that runs every 5 minutes"
+                    "command": "echo This is a job that runs every hour at 5 minutes past the hour"
                 }
             }
         }
@@ -55,7 +55,7 @@ by defining a list of lines under node[:cron][:crontab_lines].
 
         "cron": {
             "crontab_lines": [
-                "5 * * * * echo This is a job that runs every 5 minutes"
+                "5 * * * * echo This is a job that runs every hour at 5 minutes past the hour"
             ]
         }
 
